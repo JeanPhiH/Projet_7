@@ -43,7 +43,7 @@ export async function getBooks() {
     // eslint-disable-next-line array-callback-return
     const books = formatBooks(response.data);
     return books;
-  } catch (err) {
+  } catch (err) { // eslint-disable-next-line
     console.error(err);
     return [];
   }

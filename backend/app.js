@@ -1,17 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const booksRoutes = require('./routes/booksRoutes');
+const userRoutes = require('./routes/userRoutes');
+const path = require('path');
 
 const app = express();
 
-//JSON
-app.use(express.json());
-
 //DATABASE CONNEXION
 mongoose.connect('mongodb+srv://p7jeanphi:mdpp7jeanphi@p7mvg.3ig75s2.mongodb.net/?retryWrites=true&w=majority&appName=P7MVG',
-	{ useNewUrlParser: true,
-		useUnifiedTopology: true })
-	.then(() => console.log('Connexion à MongoDB réussie !'))
-	.catch(() => console.log('Connexion à MongoDB échouée !'));
+{ useNewUrlParser: true,
+	useUnifiedTopology: true })
+.then(() => console.log('Connexion à MongoDB réussie !'))
+.catch(() => console.log('Connexion à MongoDB échouée !'));
+	
+//JSON
+app.use(express.json());
 
 //CORS
 app.use((req, res, next) => {
@@ -24,6 +27,7 @@ app.use((req, res, next) => {
 //SHORTCUTS
 app.use('/api/books', booksRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 module.exports = app;

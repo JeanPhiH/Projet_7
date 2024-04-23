@@ -39,7 +39,6 @@ exports.login = (req, res, next) => {
 						)
 					}); // on envoie un token en cas de réussite
 					// on enregistre userId dans le sessionStorage
-					window.sessionStorage.setItem('userId', user._id);
 					})
 				.catch(error => res.status(500).json({ error }));
 		})
