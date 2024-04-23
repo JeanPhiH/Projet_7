@@ -1,4 +1,5 @@
 const Book = require('../models/book');
+const User = require('../models/user');
 
 //POST
 exports.postBook = (req, res, next) => {
@@ -6,11 +7,14 @@ exports.postBook = (req, res, next) => {
   const book = new Book({
     ...req.body // on copie le schéma de données
 		// same as:
+    // userId: window.sessionStorage.getItem('userId'),
 		// title: req.body.title,
-    // description: req.body.description,
+		// author: req.body.author,
     // imageUrl: req.body.imageUrl,
-    // price: req.body.price,
-    // userId: req.body.userId
+		// year: req.body.year,
+		// genre: req.body.genre,
+		// ratings.userId: window.sessionStorage.getItem('userId'),
+		// ratings.rating: req.body.rating
   });
   book.save() // on sauvegarde dans la DB
     .then(() => res.status(201).json({ message: 'New book registered !'}))
