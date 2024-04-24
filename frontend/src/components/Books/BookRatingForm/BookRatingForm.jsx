@@ -30,12 +30,12 @@ function BookRatingForm({
     if (!connectedUser || !auth) {
       navigate(APP_ROUTES.SIGN_IN);
     }
-    const update = await rateBook(id, userId, rating);
+    const update = await rateBook(id, userId, rating); // eslint-disable-next-line
     console.log(update);
     if (update) {
       // eslint-disable-next-line no-underscore-dangle
       setBook({ ...update, id: update._id });
-    } else {
+    } else { // eslint-disable-next-line
       alert(update);
     }
   };

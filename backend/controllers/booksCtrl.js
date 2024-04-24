@@ -14,7 +14,7 @@ exports.postBook = (req, res, next) => {
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
 		ratings: [{
 			userId: req.auth.userId,
-			grade: req.body.rating
+			grade: req.body.grade
 		}],
   });
   book.save() // on sauvegarde dans la DB
@@ -80,3 +80,4 @@ exports.getAllBooks = (req, res, next) => {
     .then(books => res.status(200).json(books))
     .catch(error => res.status(400).json({ error }));
 }
+

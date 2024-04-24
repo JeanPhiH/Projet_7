@@ -38,7 +38,6 @@ exports.login = (req, res, next) => {
 							{ expiresIn: '24h' }
 						)
 					}); // on envoie un token en cas de réussite
-					// on enregistre userId dans le sessionStorage
 					})
 				.catch(error => res.status(500).json({ error }));
 		})

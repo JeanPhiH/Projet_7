@@ -28,7 +28,7 @@ export async function getAuthenticatedUser() {
       return defaultReturnObject;
     }
     return { authenticated: true, user: { userId, token } };
-  } catch (err) {
+  } catch (err) { // eslint-disable-next-line
     console.error('getAuthenticatedUser, Something Went Wrong', err);
     return defaultReturnObject;
   }
@@ -59,7 +59,7 @@ export async function getBook(id) {
     // eslint-disable-next-line no-underscore-dangle
     book.id = book._id;
     return book;
-  } catch (err) {
+  } catch (err) { // eslint-disable-next-line
     console.error(err);
     return null;
   }
@@ -72,7 +72,7 @@ export async function getBestRatedBooks() {
       url: `${API_ROUTES.BEST_RATED}`,
     });
     return formatBooks(response.data);
-  } catch (e) {
+  } catch (e) { // eslint-disable-next-line
     console.error(e);
     return [];
   }
@@ -85,7 +85,7 @@ export async function deleteBook(id) {
       },
     });
     return true;
-  } catch (err) {
+  } catch (err) { // eslint-disable-next-line
     console.error(err);
     return false;
   }
@@ -107,7 +107,7 @@ export async function rateBook(id, userId, rating) {
     // eslint-disable-next-line no-underscore-dangle
     book.id = book._id;
     return book;
-  } catch (e) {
+  } catch (e) { // eslint-disable-next-line
     console.error(e);
     return e.message;
   }
@@ -140,7 +140,7 @@ export async function addBook(data) {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
-  } catch (err) {
+  } catch (err) { // eslint-disable-next-line
     console.error(err);
     return { error: true, message: err.message };
   }
@@ -156,7 +156,7 @@ export async function updateBook(data, id) {
     author: data.author,
     year: data.year,
     genre: data.genre,
-  };
+  }; // eslint-disable-next-line
   console.log(data.file[0]);
   if (data.file[0]) {
     newData = new FormData();
@@ -176,7 +176,7 @@ export async function updateBook(data, id) {
       },
     });
     return newBook;
-  } catch (err) {
+  } catch (err) { // eslint-disable-next-line
     console.error(err);
     return { error: true, message: err.message };
   }
