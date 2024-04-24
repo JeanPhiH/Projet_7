@@ -13,7 +13,8 @@ exports.postBook = (req, res, next) => {
 		userId: req.auth.userId,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
 		ratings: [{
-			userId: req.auth.userId
+			userId: req.auth.userId,
+			grade: req.body.rating
 		}],
   });
   book.save() // on sauvegarde dans la DB

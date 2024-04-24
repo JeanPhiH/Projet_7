@@ -9,11 +9,11 @@ const router = express.Router();
 router.post('/', auth, multer, booksCtrl.postBook);
 router.put('/:id', auth, multer, booksCtrl.putBook);
 router.delete('/:id', auth, booksCtrl.deleteBook);
-router.get('/:id', auth, booksCtrl.getOneBook);
-router.get('/', auth, booksCtrl.getAllBooks);
+router.get('/:id', booksCtrl.getOneBook);
+router.get('/', booksCtrl.getAllBooks);
 
 // RATING ROUTES
 router.post('/:id/rating', auth, ratingCtrl.postRating);
-router.get('/bestrating', auth, ratingCtrl.getBestRating);
+router.get('/bestrating', ratingCtrl.getBestRating);
 
 module.exports = router;
