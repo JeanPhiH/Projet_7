@@ -10,7 +10,7 @@ const bookSchema = new mongoose.Schema({
 	ratings: [
 		{
 			userId: { type: String, required: true }, 
-			grade: { type: Number, required: true }
+			grade: { type: Number }
 		}
 	],
 	averageRating: { type: Number, required: true },
