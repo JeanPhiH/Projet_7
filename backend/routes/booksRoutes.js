@@ -14,7 +14,7 @@ router.get('/:id', booksCtrl.getOneBook);
 router.get('/', booksCtrl.getAllBooks);
 
 // RATING ROUTES
-router.post('/:id/rating', auth, ratingCtrl.postRating);
 router.get('/bestrating', ratingCtrl.getBestRating);
+router.post('/:id/rating', auth, ratingCtrl.postRating);
 
 module.exports = router;

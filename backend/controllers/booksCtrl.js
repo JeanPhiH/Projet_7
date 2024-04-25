@@ -11,14 +11,13 @@ exports.postBook = (req, res, next) => {
   delete bookObject._id;
 	delete bookObject._userId; 
 	// on supprime le faux id utilisé par le frontend
-
   const book = new Book({
 		...bookObject,
 		userId: req.auth.userId,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${noExtFileName}.webp`,
 		ratings: [{
 			userId: req.auth.userId,
-			// grade: req.body.grade
+			grade: bookObject.ratings[0].grade
 		}],
   });
   book.save() // on sauvegarde dans la DB
@@ -61,7 +60,6 @@ exports.deleteBook = (req, res, next) => {
 			} else {
 				const filename = book.imageUrl.split('/images/')[1];
 				//on isole le nom du fichier et on supprime l'image
-				console.log(filename);
 				fs.unlink(`images/${filename}`, () => {
 					Book.deleteOne({_id: req.params.id})
 						.then(() => { res.status(200).json({message: 'Book deleted !'})})
