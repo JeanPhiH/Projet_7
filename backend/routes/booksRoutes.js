@@ -6,6 +6,10 @@ const booksCtrl = require('../controllers/booksCtrl');
 const ratingCtrl = require('../controllers/ratingCtrl');
 const router = express.Router();
 
+// RATING ROUTES
+router.get('/bestrating', ratingCtrl.getBestRating);
+router.post('/:id/rating', auth, ratingCtrl.postRating);
+
 // BOOK ROUTES
 router.post('/', auth, multer, sharp, booksCtrl.postBook);
 router.put('/:id', auth, multer, sharp, booksCtrl.putBook);
@@ -13,8 +17,5 @@ router.delete('/:id', auth, booksCtrl.deleteBook);
 router.get('/:id', booksCtrl.getOneBook);
 router.get('/', booksCtrl.getAllBooks);
 
-// RATING ROUTES
-router.get('/bestrating', ratingCtrl.getBestRating);
-router.post('/:id/rating', auth, ratingCtrl.postRating);
 
 module.exports = router;

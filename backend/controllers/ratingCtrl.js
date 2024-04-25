@@ -30,8 +30,9 @@ exports.postRating = (req, res, next) => {
 		book.averageRating = sumOfGrades / totalRatings;
 
 		// Mettre à jour le livre dans la base de données
+		console.log(book);
 		book.save()
-			.then(res => res.status(200).json({ message: 'Notation ajoutée avec succès.' }))
+			.then(() => res.status(200).json(book))
 			.catch(error => res.status(500).json({ error: error.message }));
 		
 	})
