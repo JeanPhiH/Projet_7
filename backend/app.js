@@ -20,6 +20,13 @@ mongoose.connect(process.env.MONGO_URI,
 app.use(express.json());
 
 //CORS
+const cors = require('cors');
+// Allow all origins
+app.use(cors());
+// Allow specific origin(s)
+app.use(cors({
+  origin: 'https://projet-7-frontend-one.vercel.app/'
+}));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
