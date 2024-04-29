@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
 	const { name: resizedName } = path.parse(filePath);
 	req.file.resizedFileName = `${resizedName}.webp`;
 
-	await sharp(filePath).resize({height: 300}).webp({ quality: 75 }).toFile("images/" + req.file.resizedFileName)
+	await sharp(filePath).resize({height: 500}).webp({ quality: 80 }).toFile("images/" + req.file.resizedFileName)
 	.catch((error) => console.log(error));
 
 	fs.unlink(filePath, (error) => {
