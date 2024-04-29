@@ -1,5 +1,5 @@
 // const API_URL = 'http://localhost:4000';
-const API_URL = 'https://projet-7-six.vercel.app';
+const API_URL = 'projet-7-git-main-jeanphihs-projects.vercel.app';
 export const API_ROUTES = {
   SIGN_UP: `${API_URL}/api/auth/signup`,
   SIGN_IN: `${API_URL}/api/auth/login`,
