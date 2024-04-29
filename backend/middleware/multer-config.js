@@ -19,7 +19,6 @@ const storage = multer.diskStorage({
     const extension = MIME_TYPES[file.mimetype];
 		const { name: noExtName } = path.parse(name);
 		const filename = noExtName + Date.now() + '.' + extension;
-		console.log("multer: " + filename);
 		callback(null, filename);
 	}
 });

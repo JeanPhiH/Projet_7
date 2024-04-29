@@ -3,6 +3,10 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = async (req, res, next) => {
+	// Check if an image file has been uploaded
+	if (!req.file) {
+		return next()
+	};
 	const filePath = req.file.path;
 	const { name: resizedName } = path.parse(filePath);
 	req.file.resizedFileName = `${resizedName}.webp`;
