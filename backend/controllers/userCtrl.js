@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 //SIGNUP
 exports.signup = (req, res, next) => {
-	bcrypt.hash(req.body.password, 10) // 10 tours de hashing
+	bcrypt.hash(req.body.password, 10) // hashing 10 times
     .then(hash => {
       const user = new User({
         email: req.body.email,
@@ -25,7 +25,7 @@ exports.login = (req, res, next) => {
 					return res.status(401).json({ message: 'Paire login/mot de passe incorrecte'});
 			}
 			bcrypt.compare(req.body.password, user.password)
-			// on compare le mot de passe entré avec celui de la bdd
+			// comparing input password with hashed password
 				.then(valid => {
 					if (!valid) {
 						return res.status(401).json({ message: 'Paire login/mot de passe incorrecte' });
@@ -37,7 +37,7 @@ exports.login = (req, res, next) => {
 							'RANDOM_TOKEN_SECRET',
 							{ expiresIn: '24h' }
 						)
-					}); // on envoie un token en cas de réussite
+					}); // sending a token when the user logs in
 					})
 				.catch(error => res.status(500).json({ error }));
 		})

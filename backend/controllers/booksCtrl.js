@@ -6,11 +6,12 @@ const path = require('path');
 //POST
 exports.postBook = (req, res, next) => {
 	const reqFileName = req.file.filename;
+	console.log("postBook reqFileName: " + reqFileName);
 	const { name: noExtFileName } = path.parse(reqFileName);
 	const bookObject = JSON.parse(req.body.book);
   delete bookObject._id;
 	delete bookObject._userId; 
-	// on supprime le faux id utilisé par le frontend
+	// delete the false id used by frontend
   const book = new Book({
 		...bookObject,
 		userId: req.auth.userId,
@@ -20,7 +21,7 @@ exports.postBook = (req, res, next) => {
 			grade: bookObject.ratings[0].grade
 		}],
   });
-  book.save() // on sauvegarde dans la DB
+  book.save() // saving in the database
     .then(() => res.status(201).json({ message: 'New book registered !'}))
     .catch(error => res.status(400).json({ error }));
 		// pareil que: .json({error: error})
@@ -59,7 +60,7 @@ exports.deleteBook = (req, res, next) => {
 				res.status(401).json({message: 'Not authorized'});
 			} else {
 				const filename = book.imageUrl.split('/images/')[1];
-				//on isole le nom du fichier et on supprime l'image
+				// get the filename to delete it
 				fs.unlink(`images/${filename}`, () => {
 					Book.deleteOne({_id: req.params.id})
 						.then(() => { res.status(200).json({message: 'Book deleted !'})})

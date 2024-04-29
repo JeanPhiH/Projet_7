@@ -1,26 +1,25 @@
 const multer = require('multer');
-const fs = require('fs');
-const sharp = require('sharp');
 const path = require('path');
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
-  'image/png': 'png'
+  'image/png': 'png',
+	'image/webp': 'webp'
 };
 
 const storage = multer.diskStorage({
-	// la destination sera le dossier images
+	// destination will be the "images" folder
   destination: (req, file, callback) => {
     callback(null, 'images');
   },
-	// on remplace les espaces par un underscore, on y ajoute la date et l'extension pour avoir un nom de fichier unique et valide
+	// replacing spaces by underscores, adding the date and the extension to have a unique and valid filename
   filename: (req, file, callback) => {
 		const name = file.originalname.split(' ').join('_');
     const extension = MIME_TYPES[file.mimetype];
 		const { name: noExtName } = path.parse(name);
 		const filename = noExtName + Date.now() + '.' + extension;
-		
+		console.log("multer: " + filename);
 		callback(null, filename);
 	}
 });
