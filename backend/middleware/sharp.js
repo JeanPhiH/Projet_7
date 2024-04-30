@@ -9,7 +9,8 @@ module.exports = async (req, res, next) => {
 	};
 	const filePath = req.file.path;
 	const { name: resizedName } = path.parse(filePath);
-	req.file.resizedFileName = `${resizedName}.webp`;
+	req.file.resizedFileName = `${resizedName}-rs.webp`;
+	// add '-rs' to handle webp images deletion
 
 	await sharp(filePath).resize({height: 500}).webp({ quality: 80 }).toFile("images/" + req.file.resizedFileName)
 	.catch((error) => console.log(error));
