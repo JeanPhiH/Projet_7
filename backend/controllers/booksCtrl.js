@@ -5,8 +5,9 @@ const fs = require('fs');
 //POST
 exports.postBook = (req, res, next) => {
 	const bookObject = JSON.parse(req.body.book);
+	// must parse the request because the image is sent as a string
   delete bookObject._id;
-	delete bookObject._userId; 
+	delete bookObject._userId;
 	// delete the false id used by frontend
   const book = new Book({
 		...bookObject,
@@ -26,7 +27,7 @@ exports.postBook = (req, res, next) => {
 //PUT
 exports.putBook = (req, res, next) => {
 	const bookObject = req.file ? {
-		...JSON.parse(req.body.book),
+		...JSON.parse(req.body.book), // parsing for the image
 		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.resizedFileName}`
 	} : { ...req.body };
 

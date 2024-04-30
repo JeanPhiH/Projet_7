@@ -8,6 +8,7 @@ module.exports = (req, res, next) => {
 		// checking if the token is valid
 		const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
 
+		// getting the userId from the token
 		const userId = decodedToken.userId;
 		req.auth = {
 			userId: userId
