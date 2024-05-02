@@ -26,10 +26,10 @@ app.use(helmet({
 
 //RATE LIMIT
 const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000, // 15 minutes
-	limit: 50, // Limit each IP to 50 requests per `window` (here, per 15 minutes)
-	message: 'Too many requests from this IP, please try again after 15 minutes'
-})
+	windowMs: 5 * 60 * 1000, // 5 minutes
+	limit: 300, // Limit each IP to 300 requests per `window` (here, per 5 minutes)
+	message: 'Too many requests from this IP, please try again after 5 minutes'
+});
 
 app.use(limiter); // Apply the rate limiting middleware to all requests.
 
