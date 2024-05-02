@@ -30,13 +30,22 @@ exports.putBook = (req, res, next) => {
 		...JSON.parse(req.body.book), // parsing for the image
 		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.resizedFileName}`
 	} : { ...req.body };
-
+	console.log("imageUrl du bookObject : " + bookObject.imageUrl);
+	
 	delete bookObject._userId;
 	Book.findOne({_id: req.params.id})
-		.then((book) => {
+	.then((book) => {
+			console.log("imageUrl du book : " + book.imageUrl);
 			if (book.userId != req.auth.userId) {
 				res.status(403).json({ message : 'Not authorized'});
 			} else {
+				if (req.file) {
+					// delete the previous image if a new file is uploaded
+					const filename = book.imageUrl.split('/images/')[1];
+					fs.unlink(`images/${filename}`, (error) => {
+						if(error) console.log(error);
+					});
+				}
 				Book.updateOne({ _id: req.params.id}, { ...bookObject, _id: req.params.id})
 				.then(() => res.status(200).json({message : 'Book modified !'}))
 				.catch(error => res.status(401).json({ error }));
