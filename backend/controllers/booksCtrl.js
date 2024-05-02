@@ -20,7 +20,13 @@ exports.postBook = (req, res, next) => {
   });
   book.save() // saving in the database
     .then(() => res.status(201).json({ message: 'New book registered !'}))
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => {
+			const filename = book.imageUrl.split('/images/')[1];
+			fs.unlink(`images/${filename}`, (error) => {
+				if(error) console.log(error);
+			});
+			res.status(400).json({ error });
+		});
 		// same as: .json({error: error})
 }
 

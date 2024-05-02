@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const booksRoutes = require('./routes/booksRoutes');
 const userRoutes = require('./routes/userRoutes');
 const path = require('path');
+const helmet = require('helmet');
 
 require('dotenv').config();
 
@@ -16,6 +17,12 @@ mongoose.connect(process.env.MONGO_URI)
 	
 //JSON
 app.use(express.json());
+
+//SECURITY
+app.use(helmet(
+	// crossOriginResourcePolicy: false
+	{ crossOriginResourcePolicy: { policy: "cross-site" } }
+));
 
 //CORS
 app.use((req, res, next) => {
