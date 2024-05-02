@@ -4,6 +4,7 @@ const booksRoutes = require('./routes/booksRoutes');
 const userRoutes = require('./routes/userRoutes');
 const path = require('path');
 const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 require('dotenv').config();
 
@@ -19,10 +20,18 @@ mongoose.connect(process.env.MONGO_URI)
 app.use(express.json());
 
 //SECURITY
-app.use(helmet(
-	// crossOriginResourcePolicy: false
-	{ crossOriginResourcePolicy: { policy: "cross-site" } }
-));
+app.use(helmet({
+	crossOriginResourcePolicy: false
+}));
+
+//RATE LIMIT
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	limit: 50, // Limit each IP to 50 requests per `window` (here, per 15 minutes)
+	message: 'Too many requests from this IP, please try again after 15 minutes'
+})
+
+app.use(limiter); // Apply the rate limiting middleware to all requests.
 
 //CORS
 app.use((req, res, next) => {
