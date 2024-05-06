@@ -36,12 +36,10 @@ exports.putBook = (req, res, next) => {
 		...JSON.parse(req.body.book), // parsing for the image
 		imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.resizedFileName}`
 	} : { ...req.body };
-	console.log("imageUrl du bookObject : " + bookObject.imageUrl);
 	
 	delete bookObject._userId;
 	Book.findOne({_id: req.params.id})
 	.then((book) => {
-			console.log("imageUrl du book : " + book.imageUrl);
 			if (book.userId != req.auth.userId) {
 				res.status(403).json({ message : 'Not authorized'});
 			} else {
