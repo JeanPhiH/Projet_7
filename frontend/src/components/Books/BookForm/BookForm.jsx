@@ -46,7 +46,7 @@ function BookForm({ book, validate }) {
   const onSubmit = async (data) => {
     // When we create a new book
     if (!book) {
-      if (!data.file[0]) {
+      if (!data.file[0]) { // eslint-disable-next-line
         alert('Vous devez ajouter une image');
       }
       if (!data.rating) {
@@ -57,14 +57,14 @@ function BookForm({ book, validate }) {
       const newBook = await addBook(data);
       if (!newBook.error) {
         validate(true);
-      } else {
+      } else { // eslint-disable-next-line
         alert(newBook.message);
       }
     } else {
       const updatedBook = await updateBook(data, data.id);
       if (!updatedBook.error) {
         navigate('/');
-      } else {
+      } else { // eslint-disable-next-line
         alert(updatedBook.message);
       }
     }
