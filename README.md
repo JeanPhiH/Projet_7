@@ -8,5 +8,3 @@ _Projet 7 de la formation Développeur Web d'OpenClassrooms._
 
 ### Pour le backend
 `npm install` puis `npm run start` pour lancer le serveur Node.
-
-Ne pas oublier de renommer le fichier _.env.example_ en _.env_
