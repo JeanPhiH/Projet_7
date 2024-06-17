@@ -33,7 +33,7 @@ const limiter = rateLimit({
 
 app.use(limiter); // Apply the rate limiting middleware to all requests.
 
-//CORS
+//CORS ISSUES
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
