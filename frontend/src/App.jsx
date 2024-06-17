@@ -16,7 +16,6 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 function App() {
   const [user, setUser] = useState(null);
   const { connectedUser } = useUser();
-
   useEffect(() => {
     setUser(connectedUser);
   }, [connectedUser]);
