@@ -41,7 +41,9 @@ app.use(limiter); // Apply the rate limiting middleware to all requests.
 //   next();
 // });
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+  origin: 'https://projet-7-frontend-eight.vercel.app'
+}));
 
 //SHORTCUTS
 app.use('/api/books', booksRoutes);
